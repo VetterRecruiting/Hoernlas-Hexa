@@ -146,7 +146,8 @@ body.menu-open .mobile-menu a:nth-child(4){transition-delay:.27s}
 body.menu-open .mobile-menu a:nth-child(5){transition-delay:.32s}
 body.menu-open .mobile-menu a:nth-child(6){transition-delay:.37s}
 body.menu-open .mobile-menu a:nth-child(7){transition-delay:.42s}
-.mm-foot{margin-top:1.6rem;display:flex;gap:1rem;opacity:0;transition:opacity .4s .5s}
+.mm-foot{margin-top:1.6rem;display:flex;flex-direction:column;gap:.7rem;opacity:0;transition:opacity .4s .5s}
+.mm-foot .btn{width:100%;justify-content:center}
 body.menu-open .mm-foot{opacity:1}
 
 /* ============ HERO ============ */
@@ -438,7 +439,7 @@ footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gr
   .events{grid-template-columns:1fr}
   .hero-bg img{object-position:center 28%}
   /* even vertical darkening on mobile (no side seam) */
-  .hero-bg::after{background:linear-gradient(180deg, rgba(18,13,9,.5) 0%, rgba(18,13,9,.42) 34%, rgba(18,13,9,.86) 82%, var(--night) 100%)}
+  .hero-bg::after{background:linear-gradient(180deg, rgba(18,13,9,.66) 0%, rgba(18,13,9,.6) 40%, rgba(18,13,9,.9) 84%, var(--night) 100%)}
   .sec-head{margin-bottom:2.2rem}
 }
 @media (max-width:560px){
