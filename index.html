@@ -255,6 +255,10 @@ section{position:relative;padding:clamp(4.5rem,9vw,8rem) 0;scroll-margin-top:90p
 .wald-vine-bg{position:absolute;left:22px;top:6px;bottom:6px;width:2px;transform:translateX(-50%);background:rgba(231,169,58,.16);z-index:0}
 .wald-vine-fill{position:absolute;left:22px;top:6px;width:3px;height:0;transform:translateX(-50%);z-index:0;border-radius:3px;background:linear-gradient(180deg,var(--ember),var(--gold));box-shadow:0 0 10px 2px rgba(231,169,58,.5)}
 .wald-vine-fill::after{content:"";position:absolute;left:50%;bottom:-3px;width:11px;height:11px;transform:translateX(-50%);border-radius:50%;background:#ffe6ad;box-shadow:0 0 14px 5px rgba(231,169,58,.85)}
+.wald-witch{position:absolute;left:22px;top:0;width:64px;height:56px;margin-left:-31px;margin-top:-40px;z-index:5;pointer-events:none;will-change:top}
+.wald-witch svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 7px rgba(231,169,58,.55))}
+.wald-witch-i{width:100%;height:100%;transform-origin:31px 40px;transform:rotate(24deg);animation:witchBob 3s ease-in-out infinite}
+@keyframes witchBob{0%,100%{transform:rotate(20deg)}50%{transform:rotate(29deg) translateY(-2px)}}
 .wald-stop{position:relative;padding:0 0 clamp(2.3rem,5vw,3.3rem) 66px;z-index:1}
 .wald-stop:last-child{padding-bottom:0}
 .wald-lantern{position:absolute;left:0;top:1px;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 50% 42%,#3a2a1e,#171009);border:2px solid var(--gold);box-shadow:0 0 0 5px rgba(207,34,48,.12),0 0 26px 5px rgba(231,169,58,.5);transition:box-shadow .6s,border-color .6s}
@@ -276,7 +280,10 @@ section{position:relative;padding:clamp(4.5rem,9vw,8rem) 0;scroll-margin-top:90p
   #geschichte .wald-stop{padding-left:56px}
   #geschichte .wald-vine-bg,#geschichte .wald-vine-fill{left:19px}
   #geschichte .wald-lantern{width:38px;height:38px}
+  #geschichte .wald-witch{left:19px;width:54px;height:47px;margin-left:-26px;margin-top:-34px}
+  #geschichte .wald-witch-i{transform-origin:26px 34px}
 }
+@media (prefers-reduced-motion: reduce){.wald-witch-i{animation:none}}
 
 /* ============ HÄS ============ */
 .haes{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
@@ -728,6 +735,20 @@ footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gr
     <div class="wald-track">
       <div class="wald-vine-bg"></div>
       <div class="wald-vine-fill"></div>
+      <div class="wald-witch" aria-hidden="true"><div class="wald-witch-i">
+        <svg viewBox="0 -14 96 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="8" y1="47" x2="88" y2="41" stroke="#e7a93a" stroke-width="4" stroke-linecap="round"/>
+          <g stroke="#e7a93a" stroke-linecap="round" stroke-width="2.4">
+            <line x1="8" y1="47" x2="0" y2="42"/><line x1="8" y1="47" x2="1" y2="47"/><line x1="8" y1="47" x2="0" y2="52"/><line x1="8" y1="47" x2="3" y2="39"/><line x1="8" y1="47" x2="2" y2="55"/>
+          </g>
+          <path d="M50 18 C53 24 53 34 50 42 L48 45 L44 45 C36 46 28 44 20 42 C26 38 30 32 34 28 C34 22 36 18 42 16 C45 15 48 16 50 18 Z" fill="#e7a93a"/>
+          <path d="M50 40 L61 44 L59 47 L48 43 Z" fill="#e7a93a"/>
+          <circle cx="46" cy="12" r="5" fill="#e7a93a"/>
+          <path d="M51 12 L58 14 L51 16 Z" fill="#e7a93a"/>
+          <path d="M44 9 L40 -10 C39 -14 34 -13 36 -8 L42 10 Z" fill="#e7a93a"/>
+          <path d="M37 10 L58 5 C60 4.6 60 8 58 8.6 L43 12 C40 12 37 11 37 10 Z" fill="#e7a93a"/>
+        </svg>
+      </div></div>
       <div class="wald-stop">
         <span class="wald-lantern" aria-hidden="true"></span>
         <div class="wald-card">
@@ -1161,6 +1182,7 @@ window.addEventListener('load',()=>{
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var track=sec.querySelector('.wald-track');
   var fill=sec.querySelector('.wald-vine-fill');
+  var witch=sec.querySelector('.wald-witch');
   var stops=[].slice.call(sec.querySelectorAll('.wald-stop'));
   var layers=[].slice.call(sec.querySelectorAll('[data-depth]'));
   var canvas=sec.querySelector('.wald-fireflies');
@@ -1169,6 +1191,7 @@ window.addEventListener('load',()=>{
   if(reduce){
     stops.forEach(function(s){s.classList.add('seen');});
     if(fill)fill.style.height='100%';
+    if(witch&&track)witch.style.top=track.clientHeight+'px';
     return;
   }
   if(track)track.classList.add('anim');
@@ -1207,6 +1230,7 @@ window.addEventListener('load',()=>{
         var tr=track.getBoundingClientRect(),vh=window.innerHeight;
         var prog=(vh*0.55-tr.top)/tr.height;prog=prog<0?0:prog>1?1:prog;
         fill.style.height=(prog*100).toFixed(1)+'%';
+        if(witch)witch.style.top=(6+prog*(track.clientHeight-12)).toFixed(1)+'px';
       }
       if(ctx){
         ctx.clearRect(0,0,W,H);
