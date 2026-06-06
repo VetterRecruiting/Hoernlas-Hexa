@@ -417,6 +417,68 @@ section{position:relative;padding:clamp(4.5rem,9vw,8rem) 0;scroll-margin-top:90p
 .ig-card iframe{width:100%;height:560px;border:0;display:block;background:#fff}
 @media(max-width:560px){.ig-card iframe{height:540px}}
 
+/* ============ HEXENJAGD (Spiel) ============ */
+.game-section{background:linear-gradient(180deg,var(--night-2),var(--night))}
+.game-head{max-width:680px;margin-bottom:2.4rem}
+.game-head h2{font-family:"Fraunces";font-size:clamp(2rem,4.8vw,3.4rem);margin:.7rem 0 0}
+.game-head h2 em{color:var(--gold-soft)}
+.game-head .lead{color:var(--parch-dim);font-size:1.08rem;margin:1rem 0 0;max-width:52ch}
+.game-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:1.4rem;align-items:start}
+@media (max-width:820px){.game-wrap{grid-template-columns:1fr}}
+.game-board{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  background:radial-gradient(120% 100% at 70% 0%,#241a2e 0%,#181226 45%,#0f0a18 100%);
+  height:clamp(340px,52vh,460px);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.game-stars{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(1.5px 1.5px at 20% 30%,rgba(255,255,255,.7),transparent),
+   radial-gradient(1.5px 1.5px at 70% 22%,rgba(255,255,255,.5),transparent),
+   radial-gradient(1.5px 1.5px at 40% 70%,rgba(255,255,255,.6),transparent),
+   radial-gradient(2px 2px at 85% 60%,rgba(255,255,255,.55),transparent),
+   radial-gradient(1.5px 1.5px at 55% 45%,rgba(255,255,255,.45),transparent),
+   radial-gradient(1.5px 1.5px at 12% 82%,rgba(255,255,255,.5),transparent)}
+.game-moon{position:absolute;top:8%;right:8%;width:60px;height:60px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fff7e0,#f3c870 60%,#c9962f);
+  box-shadow:0 0 40px 8px rgba(243,200,112,.32);pointer-events:none}
+.game-hud{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;
+  padding:.7rem .9rem;font-family:"Hanken Grotesk";z-index:4;pointer-events:none}
+.game-hud .pill{background:rgba(15,10,20,.6);border:1px solid var(--line);border-radius:99px;
+  padding:.35em .9em;font-weight:700;font-size:.92rem;color:var(--parch);backdrop-filter:blur(4px)}
+.game-hud .pill b{color:var(--gold-soft)}
+.target{position:absolute;display:flex;align-items:center;justify-content:center;
+  width:clamp(48px,13vw,62px);height:clamp(48px,13vw,62px);font-size:clamp(30px,8vw,40px);
+  border:none;background:none;cursor:pointer;padding:0;line-height:1;z-index:3;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.5));transform:scale(0);
+  animation:popIn .18s var(--ease) forwards;-webkit-tap-highlight-color:transparent}
+.target.gold{filter:drop-shadow(0 0 10px rgba(243,200,112,.95))}
+.target.hit{animation:popOut .22s var(--ease) forwards}
+@keyframes popIn{to{transform:scale(1)}}
+@keyframes popOut{0%{transform:scale(1)}100%{transform:scale(1.6);opacity:0}}
+.score-float{position:absolute;z-index:5;pointer-events:none;font-family:"Fraunces";font-weight:600;
+  color:var(--gold-soft);font-size:1.1rem;animation:floatUp .6s var(--ease) forwards}
+@keyframes floatUp{to{transform:translateY(-26px);opacity:0}}
+.game-overlay{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:1rem;padding:1.4rem;
+  background:rgba(11,8,16,.8);backdrop-filter:blur(3px)}
+.game-overlay[hidden]{display:none}
+.game-overlay h3{font-family:"Fraunces";font-size:clamp(1.4rem,4vw,2rem);margin:0;color:var(--parch)}
+.game-overlay p{color:var(--parch-dim);font-size:.98rem;margin:0;max-width:34ch}
+.game-overlay .big{font-family:"Fraunces";font-size:clamp(2.4rem,9vw,3.4rem);color:var(--gold-soft);line-height:1}
+.game-nameform{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;width:100%;max-width:340px}
+.game-nameform input{flex:1;min-width:140px;background:rgba(243,231,206,.06);border:1px solid var(--line);
+  border-radius:99px;padding:.7em 1.1em;color:var(--parch);font-family:"Hanken Grotesk";font-size:.95rem}
+.game-nameform input:focus{outline:none;border-color:var(--gold)}
+.board-panel{border:1px solid var(--line);border-radius:20px;padding:1.3rem 1.4rem;
+  background:linear-gradient(180deg,var(--night-2),rgba(20,16,13,.55))}
+.board-panel h3{font-family:"Fraunces";font-size:1.3rem;margin:0 0 1rem;display:flex;align-items:center;gap:.5em}
+.board-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.1rem}
+.board-list li{display:flex;align-items:center;gap:.7rem;padding:.55em .3em;border-bottom:1px solid var(--line);font-family:"Hanken Grotesk"}
+.board-list li:last-child{border-bottom:none}
+.board-list .rank{width:1.8em;text-align:center;font-family:"Fraunces";color:var(--gold);font-weight:600}
+.board-list .who{flex:1;color:var(--parch);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.board-list .pts{color:var(--gold-soft);font-weight:700}
+.board-list li.me{background:rgba(231,169,58,.12);border-radius:8px;border-bottom-color:transparent}
+.board-empty{color:var(--parch-faint);font-size:.92rem;border-bottom:none}
+@media (prefers-reduced-motion:reduce){.target{animation:none;transform:scale(1)}.target.hit{opacity:0}.score-float{display:none}}
+
 /* ============ FOOTER ============ */
 footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gradient(180deg,var(--night),#0e0a07)}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem}
@@ -644,6 +706,7 @@ footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gr
       <a href="#bilder">Bilder</a>
       <a href="#presse">Presse</a>
       <a href="#kontakt">Kontakt</a>
+      <a href="#hexenspiel">Hexenjagd</a>
     </nav>
     <a href="#kontakt" class="btn btn--gold btn--sm nav-cta">Mitmachen</a>
     <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
@@ -661,6 +724,7 @@ footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gr
   <a href="#bilder">Bilder <span>05</span></a>
   <a href="#presse">Presse <span>06</span></a>
   <a href="#kontakt">Kontakt <span>07</span></a>
+  <a href="#hexenspiel">Hexenjagd <span>08</span></a>
   <div class="mm-foot">
     <a href="#kontakt" class="btn btn--gold btn--sm">Mitmachen</a>
     <a href="mailto:hoernleshexa@gmail.com" class="btn btn--ghost btn--sm">Mail schreiben</a>
@@ -1057,6 +1121,164 @@ footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gr
 })();
 </script>
 
+<!-- HEXENJAGD (Spiel) -->
+<section id="hexenspiel" class="game-section">
+  <div class="wrap">
+    <div class="game-head reveal">
+      <span class="eyebrow">Zum Mitmachen</span>
+      <h2>Die <em>Hexenjagd</em></h2>
+      <p class="lead">Tippe in 30 Sekunden so viele Hexen wie möglich! Die goldene Hexe&nbsp;🧙‍♀️ zählt fünffach. Danach trägst du dich in die Bestenliste ein – sie wird in deinem Browser gespeichert.</p>
+    </div>
+    <div class="game-wrap reveal d1">
+      <div class="game-board" id="gameBoard">
+        <div class="game-stars"></div>
+        <div class="game-moon"></div>
+        <div class="game-hud">
+          <span class="pill">Zeit <b id="gameTime">30</b>s</span>
+          <span class="pill">Hexen <b id="gameScore">0</b></span>
+        </div>
+        <div class="game-overlay" id="gameStart">
+          <div style="font-size:2.8rem">🧙‍♀️</div>
+          <h3>Fang die Hexen!</h3>
+          <p>Tippe die Hexen, bevor sie verschwinden. Die goldene zählt ×5. Bereit?</p>
+          <button class="btn btn--gold" id="gameStartBtn" type="button">Los geht's</button>
+        </div>
+        <div class="game-overlay" id="gameEnd" hidden>
+          <p>Zeit um! Du hast gefangen:</p>
+          <div class="big" id="gameFinal">0</div>
+          <form class="game-nameform" id="gameForm">
+            <input type="text" id="gameName" maxlength="16" placeholder="Dein Name" autocomplete="off" aria-label="Dein Name">
+            <button class="btn btn--gold" type="submit">Eintragen</button>
+          </form>
+          <button class="btn btn--ghost btn--sm" id="gameAgain" type="button">Nochmal spielen</button>
+        </div>
+      </div>
+      <div class="board-panel reveal d2">
+        <h3>🏆 Bestenliste</h3>
+        <ol class="board-list" id="boardList"><li class="board-empty">Noch keine Einträge – sei die Erste!</li></ol>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var board=document.getElementById('gameBoard');
+  if(!board)return;
+  var elTime=document.getElementById('gameTime'),
+      elScore=document.getElementById('gameScore'),
+      elStart=document.getElementById('gameStart'),
+      elStartBtn=document.getElementById('gameStartBtn'),
+      elEnd=document.getElementById('gameEnd'),
+      elFinal=document.getElementById('gameFinal'),
+      elForm=document.getElementById('gameForm'),
+      elName=document.getElementById('gameName'),
+      elAgain=document.getElementById('gameAgain'),
+      boardList=document.getElementById('boardList');
+  var KEY='hexaScores';
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var score=0,timeLeft=30,running=false,spawnT=null,tickT=null,lastScore=0;
+
+  function rnd(min,max){return Math.random()*(max-min)+min;}
+
+  function spawn(){
+    if(!running)return;
+    var gold=Math.random()<0.16;
+    var b=document.createElement('button');
+    b.type='button';
+    b.className='target'+(gold?' gold':'');
+    b.textContent=gold?'🧙‍♀️':'🧙';
+    var pad=14,w=board.clientWidth,h=board.clientHeight,size=62;
+    b.style.left=rnd(pad,Math.max(pad,w-size-pad))+'px';
+    b.style.top=rnd(54,Math.max(60,h-size-pad))+'px';
+    var pts=gold?5:1;
+    var life=gold?rnd(700,950):rnd(900,1350);
+    var killed=false;
+    function remove(){if(b.parentNode)b.parentNode.removeChild(b);}
+    var lifeT=setTimeout(remove,life);
+    b.addEventListener('click',function(){
+      if(killed||!running)return;killed=true;
+      clearTimeout(lifeT);
+      score+=pts;elScore.textContent=score;
+      floatPts(b,pts);
+      if(reduce){remove();}else{b.classList.add('hit');setTimeout(remove,200);}
+    });
+    board.appendChild(b);
+    var base=Math.max(380,760-(30-timeLeft)*14);
+    spawnT=setTimeout(spawn,rnd(base*0.6,base));
+  }
+
+  function floatPts(target,pts){
+    if(reduce)return;
+    var f=document.createElement('span');
+    f.className='score-float';f.textContent='+'+pts;
+    f.style.left=target.style.left;f.style.top=target.style.top;
+    board.appendChild(f);
+    setTimeout(function(){if(f.parentNode)f.parentNode.removeChild(f);},600);
+  }
+
+  function tick(){
+    timeLeft--;elTime.textContent=Math.max(0,timeLeft);
+    if(timeLeft<=0)end();
+  }
+
+  function clearTargets(){
+    var nodes=board.querySelectorAll('.target,.score-float');
+    for(var i=0;i<nodes.length;i++){nodes[i].parentNode&&nodes[i].parentNode.removeChild(nodes[i]);}
+  }
+
+  function start(){
+    score=0;timeLeft=30;running=true;
+    elScore.textContent='0';elTime.textContent='30';
+    elStart.hidden=true;elEnd.hidden=true;
+    clearTargets();
+    tickT=setInterval(tick,1000);
+    spawn();
+  }
+
+  function end(){
+    running=false;
+    clearInterval(tickT);clearTimeout(spawnT);
+    clearTargets();
+    lastScore=score;
+    elFinal.textContent=score;
+    elEnd.hidden=false;
+    setTimeout(function(){try{elName.focus();}catch(e){}},60);
+  }
+
+  function getScores(){try{return JSON.parse(localStorage.getItem(KEY))||[];}catch(e){return [];}}
+  function saveScores(a){try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){}}
+
+  function render(highlightId){
+    var s=getScores().sort(function(a,b){return b.score-a.score;}).slice(0,10);
+    if(!s.length){boardList.innerHTML='<li class="board-empty">Noch keine Einträge – sei die Erste!</li>';return;}
+    var medals=['🥇','🥈','🥉'];
+    boardList.innerHTML=s.map(function(e,i){
+      var rank=medals[i]||(i+1);
+      var cls=(highlightId!=null&&e._id===highlightId)?'me':'';
+      return '<li class="'+cls+'"><span class="rank">'+rank+'</span><span class="who"></span><span class="pts">'+e.score+'</span></li>';
+    }).join('');
+    var whos=boardList.querySelectorAll('.who');
+    s.forEach(function(e,i){whos[i].textContent=e.name;});
+  }
+
+  elStartBtn.addEventListener('click',start);
+  elAgain.addEventListener('click',start);
+  elForm.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=(elName.value||'').trim().slice(0,16)||'Anonyme Hexe';
+    var all=getScores();
+    var id=Date.now()+'-'+Math.round(Math.random()*1e6);
+    all.push({name:name,score:lastScore,_id:id,t:Date.now()});
+    saveScores(all);
+    render(id);
+    elName.value='';
+    elEnd.hidden=true;elStart.hidden=false;
+  });
+
+  render();
+})();
+</script>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -1084,6 +1306,7 @@ footer{border-top:1px solid var(--line);padding:4rem 0 2rem;background:linear-gr
         <a href="#termine">Termine</a>
         <a href="#bilder">Bilder</a>
         <a href="#kontakt">Kontakt</a>
+        <a href="#hexenspiel">Hexenjagd</a>
         <a href="mailto:hoernleshexa@gmail.com">hoernleshexa@gmail.com</a>
       </div>
     </div>
